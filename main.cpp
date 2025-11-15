@@ -88,6 +88,7 @@ void simulateTollBooth(deque<Car> &cars)
 
 void printCarDetails(Car &car)
 {
+    // Comment #11: Printing a single car's details.
     cout << "[" << car.getYear() << " " << car.getMake() << " (" 
     << car.getTransponder() << ")]" << endl;
 }
