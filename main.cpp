@@ -6,6 +6,7 @@ using namespace std;
 const int NUMBER_OF_CARS_IN_LINE = 2;
 
 void printCarDetails(deque<Car> &cars);
+void simulateTollBooth(deque<Car> &cars);
 
 int main()
 {
@@ -20,8 +21,7 @@ int main()
         cars.push_back(car);
     }
     
-    // Comment #5: Print each car details in the deque.
-    printCarDetails(cars);
+    simulateTollBooth(cars);
 
     return 0;
 }
@@ -33,5 +33,24 @@ void printCarDetails(deque<Car> &cars)
     {
         cout << "[" << car.getYear() << " " << car.getMake() << " (" 
             << car.getTransponder() << ")]" << endl;
+    }
+}
+
+void simulateTollBooth(deque<Car> &cars)
+{
+    while (cars.empty())
+    {
+        int r = rand() % 100 + 1;   // gives 1–100
+
+        if (r < 55) {
+            cars.pop_front();
+        } 
+        else 
+        {
+            Car car;
+            cars.push_back(car);
+        }
+
+        printCarDetails(cars);
     }
 }
