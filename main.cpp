@@ -19,7 +19,8 @@ int main()
         Car car;
         cars.push_back(car);
     }
-
+    
+    // Comment #5: Print each car details in the deque.
     printCarDetails(cars);
 
     return 0;
@@ -27,7 +28,7 @@ int main()
 
 void printCarDetails(deque<Car> &cars)
 {
-    // Comment #5: Iterate over cars in the deque and print the cars' details.
+    // Comment #6: Iterate over cars in the deque and print the cars' details.
     for (auto &car : cars) 
     {
         cout << "[" << car.getYear() << " " << car.getMake() << " (" 
