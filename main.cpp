@@ -18,15 +18,21 @@ int main()
 
     cout << "Initial queue:" << endl;
 
-    // Comment #3: Initialize deque with number of cars in line.
-    for (int i = 0; i < NUMBER_OF_CARS_IN_LINE; i++)
+    // Initialize each lane with 2 cars.
+    for (int laneNum = 0; laneNum < lanes.size(); laneNum++ )
     {
-        // Comment #4: Create a random car object and add to the deque.
-        Car car;
-        lanes[0].push_back(car); // Adding cars to lane 1
+        cout << "Lane " << laneNum << ":" << endl;
+        // Comment #3: Initialize deque with number of cars in line.
+        for (int i = 0; i < NUMBER_OF_CARS_IN_LINE; i++)
+        {
+            // Comment #4: Create a random car object and add to the deque.
+            Car car;
+            lanes[0].push_back(car); // Adding cars to lane 1
+        }
+
+        printAllCarDetails(lanes[0]);
     }
 
-    printAllCarDetails(lanes[0]);
     simulateTollBooth(lanes[0]);
 
     return 0;
