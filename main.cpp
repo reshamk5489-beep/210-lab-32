@@ -62,7 +62,7 @@ void printAllCarDetails(deque<Car> &cars)
 void simulateTollBooth(array<deque<Car>, NUMBER_OF_LANES> &lanes)
 {
     // Comment #8: Run the simulation for 20 time periods.
-    for (int i = 1; i < NUMBER_OF_TIME_PERIODS; ++i)
+    for (int i = 1; i <= NUMBER_OF_TIME_PERIODS; ++i)
     {
         cout << endl << "Time: " << i << endl;
 
