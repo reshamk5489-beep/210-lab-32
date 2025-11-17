@@ -7,7 +7,9 @@ using namespace std;
 const int NUMBER_OF_CARS_IN_LINE = 2;
 const int NUMBER_OF_LANES = 4;
 const int NUMBER_OF_TIME_PERIODS = 20;
-const int PROBABILITY_OF_CAR_PAYING_AND_LEAVING = 50;
+const int PROBABILITY_OF_CAR_PAYING_AND_LEAVING = 46;
+const int PROBABILITY_OF_CAR_JOINING = 39;
+const int PROBABILITY_OF_CAR_SWITCHING_LANES = 15;
 
 void printAllCarDetails(deque<Car> &cars);
 void printCarDetails(Car &car);
@@ -84,13 +86,33 @@ void simulateTollBooth(array<deque<Car>, NUMBER_OF_LANES> &lanes)
                 printCarDetails(car);
 
             } 
-            else // Comment #13: If random number is less than or equal to 45 means 45% 
-                 // probability that the car joins the line for the toll booth.
+            else if (r <= PROBABILITY_OF_CAR_JOINING)
+                // Comment #13: If random number is less than or equal to 45 means 45% 
+                // probability that the car joins the line for the toll booth.
             {
                 Car car;
                 cars.push_back(car);
                 cout << " Joined: ";
                 printCarDetails(car);
+            }
+            else if (r <= PROBABILITY_OF_CAR_SWITCHING_LANES)
+            {
+                // 15% probabillity switching lanes
+                int randomLaneNum = rand() % 4; // Random number between 0 to 3.
+                if (laneNum == randomLaneNum)
+                {
+                    if (laneNum == 0)
+                    {
+                        randomLaneNum++;
+                    }
+                    else
+                    {
+                        randomLaneNum--;
+                    }
+                }
+
+                Car car = cars.back();
+                lanes[randomLaneNum].push_back(car); // switching a car from laneNum to randomLaneNum.
             }
         }
 
@@ -111,5 +133,3 @@ void printCarDetails(Car &car)
     cout << "[" << car.getYear() << " " << car.getMake() << " (" 
     << car.getTransponder() << ")]" << endl;
 }
-
-// milestone 4
