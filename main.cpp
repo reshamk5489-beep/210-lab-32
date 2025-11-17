@@ -97,7 +97,7 @@ void simulateTollBooth(array<deque<Car>, NUMBER_OF_LANES> &lanes)
             else
             {
                 // Comment #14: 15% probabillity switching lanes.
-                int randomLaneNum = rand() % 4; // Random number between 0 to 3.
+                int randomLaneNum = rand() % 4; // Comment #15: Random number between 0 to 3.
                 if (laneNum == randomLaneNum)
                 {
                     if (laneNum == 0)
@@ -111,7 +111,7 @@ void simulateTollBooth(array<deque<Car>, NUMBER_OF_LANES> &lanes)
                 }
 
                 Car car = cars.back();
-                // Comment #15: Switching a car from laneNum to randomLaneNum.
+                // Comment #16: Switching a car from laneNum to randomLaneNum.
                 lanes[randomLaneNum].push_back(car); 
                 cars.pop_front();
 
@@ -134,7 +134,7 @@ void simulateTollBooth(array<deque<Car>, NUMBER_OF_LANES> &lanes)
 
 void printCarDetails(Car &car)
 {
-    // Comment #16: Printing a single car's details.
+    // Comment #17: Printing a single car's details.
     cout << "[" << car.getYear() << " " << car.getMake() << " (" 
     << car.getTransponder() << ")]" << endl;
 }
