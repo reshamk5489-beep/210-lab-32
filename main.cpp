@@ -54,20 +54,19 @@ void printAllCarDetails(deque<Car> &cars)
         }
     }
 
-    cout << endl;
+    // cout << endl;
 }
 
 void simulateTollBooth(array<deque<Car>, NUMBER_OF_LANES> &lanes)
 {
-    int i = 1;
-
-    for (int laneNum = 0; laneNum < lanes.size(); laneNum++ )
+    for (int i = 1; i < 20; ++i)
     {
-        deque<Car> cars = lanes[laneNum];
-        // Comment #6: Iterate over deque of cars until the deque is empty.
-        while (!cars.empty())
+        cout << endl << "Time: " << i << endl;
+        for (int laneNum = 0; laneNum < lanes.size(); laneNum++ )
         {
-            cout << "Time: " << i << endl;
+            deque<Car> cars = lanes[laneNum];
+            // Comment #6: Iterate over deque of cars until the deque is empty.
+           
             cout << "Lane: " << laneNum + 1;
             int r = rand() % 100 + 1;   // Comment #7: Generate random number between 1 and 100.
 
@@ -77,7 +76,7 @@ void simulateTollBooth(array<deque<Car>, NUMBER_OF_LANES> &lanes)
                 // Comment #9: Read car from the head before deleting it.
                 Car car = cars.front();
                 cars.pop_front();
-                cout << "Paid: ";
+                cout << " Paid: ";
                 printCarDetails(car);
 
             } 
@@ -86,13 +85,16 @@ void simulateTollBooth(array<deque<Car>, NUMBER_OF_LANES> &lanes)
             {
                 Car car;
                 cars.push_back(car);
-                cout << "Joined: ";
+                cout << " Joined: ";
                 printCarDetails(car);
             }
-            
-            cout << "Queue:" << endl;
+        }
+
+        for (int laneNum = 0; laneNum < lanes.size(); laneNum++ )
+        {
+            deque<Car> cars = lanes[laneNum];
+            cout << "Lane " << laneNum + 1 << " Queue:" << endl;
             printAllCarDetails(cars);
-            ++i;
         }
     }
 
