@@ -49,7 +49,7 @@ void printAllCarDetails(deque<Car> &cars)
         // Comment #5: Iterate over cars in the deque and print the cars' details.
         for (auto &car : cars) 
         {
-            cout << "    ";    
+            cout << "        ";    
             printCarDetails(car);
         }
     }
@@ -71,7 +71,7 @@ void simulateTollBooth(array<deque<Car>, NUMBER_OF_LANES> &lanes)
             int r = rand() % 100 + 1;   // Comment #7: Generate random number between 1 and 100.
 
             if (r <= 55) // Comment #8: If random number is less than or equal to 55 means 55% 
-                        // probability that the car pays toll and leaves.
+                         // probability that the car pays toll and leaves.
             {
                 // Comment #9: Read car from the head before deleting it.
                 Car car = cars.front();
@@ -81,7 +81,7 @@ void simulateTollBooth(array<deque<Car>, NUMBER_OF_LANES> &lanes)
 
             } 
             else // Comment #10: If random number is less than or equal to 45 means 45% 
-                // probability that the car joins the line for the toll booth.
+                 // probability that the car joins the line for the toll booth.
             {
                 Car car;
                 cars.push_back(car);
