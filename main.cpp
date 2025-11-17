@@ -9,7 +9,6 @@ const int NUMBER_OF_LANES = 4;
 const int NUMBER_OF_TIME_PERIODS = 20;
 const int PROBABILITY_OF_CAR_PAYING_AND_LEAVING = 46;
 const int PROBABILITY_OF_CAR_JOINING = 39;
-const int PROBABILITY_OF_CAR_SWITCHING_LANES = 15;
 
 void printAllCarDetails(deque<Car> &cars);
 void printCarDetails(Car &car);
@@ -76,8 +75,8 @@ void simulateTollBooth(array<deque<Car>, NUMBER_OF_LANES> &lanes)
             cout << "Lane: " << laneNum + 1;
             int r = rand() % 100 + 1;   // Comment #10: Generate random number between 1 and 100.
 
-            if (r <= PROBABILITY_OF_CAR_PAYING_AND_LEAVING) // Comment #11: If random number is less than or equal to 55 means 55% 
-                         // probability that the car pays toll and leaves.
+            if (r <= PROBABILITY_OF_CAR_PAYING_AND_LEAVING) // Comment #11: If random number is less than or equal to 46 means 46% 
+                                                            // probability that the car pays toll and leaves.
             {
                 // Comment #12: Read car from the head before deleting it.
                 Car car = cars.front();
@@ -86,8 +85,8 @@ void simulateTollBooth(array<deque<Car>, NUMBER_OF_LANES> &lanes)
                 printCarDetails(car);
 
             } 
-            else if (r <= PROBABILITY_OF_CAR_JOINING)
-                // Comment #13: If random number is less than or equal to 45 means 45% 
+            else if (r <= PROBABILITY_OF_CAR_PAYING_AND_LEAVING + PROBABILITY_OF_CAR_JOINING)
+                // Comment #13: If random number is less than or equal to 39 means 39% 
                 // probability that the car joins the line for the toll booth.
             {
                 Car car;
@@ -95,9 +94,9 @@ void simulateTollBooth(array<deque<Car>, NUMBER_OF_LANES> &lanes)
                 cout << " Joined: ";
                 printCarDetails(car);
             }
-            else if (r <= PROBABILITY_OF_CAR_SWITCHING_LANES)
+            else
             {
-                // 15% probabillity switching lanes
+                // Comment #14: 15% probabillity switching lanes.
                 int randomLaneNum = rand() % 4; // Random number between 0 to 3.
                 if (laneNum == randomLaneNum)
                 {
@@ -112,7 +111,13 @@ void simulateTollBooth(array<deque<Car>, NUMBER_OF_LANES> &lanes)
                 }
 
                 Car car = cars.back();
-                lanes[randomLaneNum].push_back(car); // switching a car from laneNum to randomLaneNum.
+                // Comment #15: Switching a car from laneNum to randomLaneNum.
+                lanes[randomLaneNum].push_back(car); 
+                cars.pop_front();
+
+                cout << " Switched: ";
+                printCarDetails(car);
+
             }
         }
 
@@ -129,7 +134,7 @@ void simulateTollBooth(array<deque<Car>, NUMBER_OF_LANES> &lanes)
 
 void printCarDetails(Car &car)
 {
-    // Comment #14: Printing a single car's details.
+    // Comment #16: Printing a single car's details.
     cout << "[" << car.getYear() << " " << car.getMake() << " (" 
     << car.getTransponder() << ")]" << endl;
 }
