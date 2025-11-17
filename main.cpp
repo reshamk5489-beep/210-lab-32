@@ -9,7 +9,7 @@ const int NUMBER_OF_LANES = 4;
 
 void printAllCarDetails(deque<Car> &cars);
 void printCarDetails(Car &car);
-void simulateTollBooth(deque<Car> &cars);
+void simulateTollBooth(array<deque<Car>, NUMBER_OF_LANES> &lanes);
 
 int main()
 {
@@ -21,19 +21,19 @@ int main()
     // Initialize each lane with 2 cars.
     for (int laneNum = 0; laneNum < lanes.size(); laneNum++ )
     {
-        cout << "Lane " << laneNum << ":" << endl;
+        cout << "Lane " << laneNum + 1 << ":" << endl;
         // Comment #3: Initialize deque with number of cars in line.
         for (int i = 0; i < NUMBER_OF_CARS_IN_LINE; i++)
         {
             // Comment #4: Create a random car object and add to the deque.
             Car car;
-            lanes[0].push_back(car); // Adding cars to lane 1
+            lanes[laneNum].push_back(car); // Adding cars to each lane
         }
 
-        printAllCarDetails(lanes[0]);
+        printAllCarDetails(lanes[laneNum]);
     }
 
-    simulateTollBooth(lanes[0]);
+    simulateTollBooth(lanes);
 
     return 0;
 }
@@ -57,40 +57,45 @@ void printAllCarDetails(deque<Car> &cars)
     cout << endl;
 }
 
-void simulateTollBooth(deque<Car> &cars)
+void simulateTollBooth(array<deque<Car>, NUMBER_OF_LANES> &lanes)
 {
     int i = 1;
 
-    // Comment #6: Iterate over deque of cars until the deque is empty.
-    while (!cars.empty())
+    for (int laneNum = 0; laneNum < lanes.size(); laneNum++ )
     {
-        cout << "Time: " << i << " Operation: ";
-        int r = rand() % 100 + 1;   // Comment #7: Generate random number between 1 and 100.
-
-        if (r <= 55) // Comment #8: If random number is less than or equal to 55 means 55% 
-                     // probability that the car pays toll and leaves.
+        deque<Car> cars = lanes[laneNum];
+        // Comment #6: Iterate over deque of cars until the deque is empty.
+        while (!cars.empty())
         {
-            // Comment #9: Read car from the head before deleting it.
-            Car car = cars.front();
-            cars.pop_front();
-            cout << "Car paid: ";
-            printCarDetails(car);
+            cout << "Time: " << i << endl;
+            cout << "Lane: " << laneNum + 1;
+            int r = rand() % 100 + 1;   // Comment #7: Generate random number between 1 and 100.
 
-        } 
-        else // Comment #10: If random number is less than or equal to 45 means 45% 
-             // probability that the car joins the line for the toll booth.
-        {
-            Car car;
-            cars.push_back(car);
-            cout << "Joined lane: ";
-            printCarDetails(car);
+            if (r <= 55) // Comment #8: If random number is less than or equal to 55 means 55% 
+                        // probability that the car pays toll and leaves.
+            {
+                // Comment #9: Read car from the head before deleting it.
+                Car car = cars.front();
+                cars.pop_front();
+                cout << "Paid: ";
+                printCarDetails(car);
+
+            } 
+            else // Comment #10: If random number is less than or equal to 45 means 45% 
+                // probability that the car joins the line for the toll booth.
+            {
+                Car car;
+                cars.push_back(car);
+                cout << "Joined: ";
+                printCarDetails(car);
+            }
+            
+            cout << "Queue:" << endl;
+            printAllCarDetails(cars);
+            ++i;
         }
-        
-        cout << "Queue:" << endl;
-        printAllCarDetails(cars);
-        ++i;
     }
-    
+
     cout << endl;
 }
 
