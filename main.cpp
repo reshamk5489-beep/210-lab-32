@@ -5,6 +5,7 @@ using namespace std;
 
 // Comment #1: Define a constant to initialize deque with number of cars.
 const int NUMBER_OF_CARS_IN_LINE = 2;
+const int NUMBER_OF_LANES = 4;
 
 void printAllCarDetails(deque<Car> &cars);
 void printCarDetails(Car &car);
@@ -13,7 +14,7 @@ void simulateTollBooth(deque<Car> &cars);
 int main()
 {
     // Comment #2: Create an array of 4 lanes with each lane being a deque of car.
-    array<deque<Car>, 4> lanes;
+    array<deque<Car>, NUMBER_OF_LANES> lanes;
 
     cout << "Initial queue:" << endl;
 
@@ -22,11 +23,11 @@ int main()
     {
         // Comment #4: Create a random car object and add to the deque.
         Car car;
-        lanes.push_back(car);
+        lanes[0].push_back(car);
     }
 
-    printAllCarDetails(lanes);
-    simulateTollBooth(lanes);
+    printAllCarDetails(lanes[0]);
+    simulateTollBooth(lanes[0]);
 
     return 0;
 }
